@@ -38,7 +38,7 @@ defmodule Hexpm.Repo.Migrations.AddIdToMeta do
     $function$;
     """)
 
-    execute("CREATE EXTENSION \"uuid-ossp\"")
+    execute("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\"")
 
     execute(
       "UPDATE packages SET meta = json_object_set_key(meta::json, 'id', uuid_generate_v4())::jsonb"
@@ -50,7 +50,7 @@ defmodule Hexpm.Repo.Migrations.AddIdToMeta do
   end
 
   def drop() do
-    execute("DROP EXTENSION \"uuid-ossp\"")
+    execute("DROP EXTENSION IF EXISTS \"uuid-ossp\"")
 
     execute("UPDATE packages SET meta = json_object_delete_keys(meta::json, 'id')::jsonb")
     execute("UPDATE releases SET meta = json_object_delete_keys(meta::json, 'id')::jsonb")

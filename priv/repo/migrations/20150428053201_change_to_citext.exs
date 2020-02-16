@@ -2,7 +2,7 @@ defmodule Hexpm.Repo.Migrations.ChangeToCitext do
   use Ecto.Migration
 
   def up() do
-    execute("CREATE EXTENSION citext")
+    execute("CREATE EXTENSION IF NOT EXISTS citext")
 
     drop(index(:users, [:username], name: :users_lower_idx))
 

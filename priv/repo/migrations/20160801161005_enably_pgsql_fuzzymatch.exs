@@ -6,6 +6,6 @@ defmodule Hexpm.Repo.Migrations.EnablyPgsqlFuzzymatch do
   end
 
   def down() do
-    raise "non reversible migration"
+    execute("DROP EXTENSION IF EXISTS fuzzystrmatch")
   end
 end
